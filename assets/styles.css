@@ -375,7 +375,6 @@ nav ul li a:hover::after{
     opacity: 1; /* Firefox */
 }
 
-
 /* Internet Explorer 10-11 */
 #contact form input:-ms-input-placeholder,
 #contact form textarea:-ms-input-placeholder {
@@ -392,7 +391,6 @@ nav ul li a:hover::after{
     flex-basis: 35%;
 }
 
-
 .contact-left p{
     margin-top: 30px;
 }
@@ -401,6 +399,18 @@ nav ul li a:hover::after{
     color: #00FF00;
     margin-right: 15px;
     font-size: 25px;
+}
+
+.contact-left a,
+.contact-left a:visited { 
+    color: white;
+    text-decoration: none;
+}
+
+.contact-left a:hover,
+.contact-left a:active {
+    text-decoration: none;
+    color: white;
 }
 
 .contact-right{
@@ -433,9 +443,8 @@ nav ul li a:hover::after{
 .btn.btn2{
     display: inline-block;
     background: #0c0c0c;
-    color:#00FF00
+    color: #00FF00;
 }
-
 
 .contact-right form{
     width: 100%;
