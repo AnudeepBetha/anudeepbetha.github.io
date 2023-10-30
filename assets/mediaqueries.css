@@ -1,0 +1,56 @@
+@media only screen and (max-width: 600px){
+
+    #header{
+        /* background-image: url('./Professional_Photo-removebg.png');
+        background-size: 80% 50%;
+        background-position: 50% bottom; */
+        background: #0B0B0B;
+    }
+
+
+    .header-text{
+        margin-top: 100%;
+        font-size: 16px;
+    }
+    .header-text h1{
+        font-size: 30px;
+    }
+
+    nav .fas{
+        display: block;
+        font-size: 25px;
+    }
+
+    nav ul{
+        background: #00DD00;
+        position: fixed;
+        top: 0;
+        right: -200px;
+        width: 200px;
+        height: 100vh;
+        padding-top: 50px;
+        z-index: 2;
+        transition: right 0.4s;
+    }
+
+    nav ul li{
+        display: block;
+        margin: 25px;
+    }
+
+    nav ul .fas{
+        position: absolute;
+        top: 25px;
+        left: 25px;
+    }
+}
+
+@media only screen and (max-width: 768px) {
+    .section-content, .section-image {
+        flex-direction: column;
+    }
+    
+    .section-content {
+        margin-bottom: 20px;
+    }
+}

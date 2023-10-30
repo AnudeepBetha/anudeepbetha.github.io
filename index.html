@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="shortcut icon" href="./assets/browser.ico" type="image/x-icon">
+    <title>Personal Portfolio</title>
+    <link rel="stylesheet" href="./assets/styles.css">
+    <link rel="stylesheet" href="./assets/mediaqueries.css">
+    <script src="https://kit.fontawesome.com/3bb6022044.js" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
+</head>
+<body>
+    <div id="header">
+        <div class="container">
+            <nav id="nav-bar">
+                <a href="#"><img class="logo" src="./logo1.png"></a>
+                    <ul id="sidemenu">
+                        <li><a href="#header">Home</a></li>
+                        <li><a href="#about">About</a></li>
+                        <li><a href="#services">Services</a></li>
+                        <li><a href="#projects">Projects</a></li>
+                        <li><a href="#contact">Contact</a></li>
+                        <i class="fas fa-times" onclick="closemenu()"></i>
+                    </ul>
+                    <i class="fas fa-bars" onclick="openmenu()"></i>
+            </nav>
+            <div class="header-text">
+                <p>Cybersecurity Graduate Student</p>
+                <h1>Hi, I'm <span>Anudeep</span> Betha.<br> Welcome to my Portfolio!</h1>
+            </div>            
+        </div>
+    </div>
+    <!-- "About Me" Section -->
+    <div id="about">
+        <div class="container">
+            <div class="row about-row">
+            <div class="about-col-1">
+                <h1 class="subtitle">About Me</h1>
+
+                <p>I'm a Cybersecurity Graduate Student with a background as an Application Security Engineer at IBM. My expertise lies in Web Application Security, where I'm passionate about both offense and defense. I thrive on staying at the forefront of cybersecurity trends, ensuring my skills are not just current but cutting-edge. <br><br> 
+                   Explore my portfolio to discover the projects and experiences that define my journey in securing the digital realm. Let's connect and contribute to making the virtual world safer for all.</p>
+                   <div class="tab-titles">
+                    <p  class="tab-links active-link" onclick="opentab('skills')">Skills</p>
+                    <p  class="tab-links" onclick="opentab('experience')">Experience</p>
+                    <p  class="tab-links" onclick="opentab('education')" >Education</p>
+                   </div>
+                   <div class="tab-contents active-tab" id="skills">
+                    <ul>
+                        <li><span>Penetration Testing</span><br>Skilled in simulating cyberattacks to identify Web Application vulnerabilities using tools like Burp Suite, Metasploit, Nmap, and more.</li> 
+                        <li><span>Incident Response</span><br>Expertise in monitoring cyber threats, participating in the incident response lifecycle, and utilizing CVE & CVSS scoring to assess and address vulnerabilities.</li>
+                        <li><span>Security Engineering</span><br>Strengthened business applications against cyberattacks with MFA authentication, remediated critical security vulnerabilities, and implemented security measures within frameworks.</li>
+                        <li><span>Secure Coding Practices</span><br>Proficient in programming with languages like Java, Python, C, C++, SQL, and more, ensuring applications are built with security at the forefront.</li>                        
+                    </ul>
+                </div>
+                   <div class="tab-contents" id="experience">
+                    <ul>
+                        <li><span>Nov 2020 - Aug 2022</span><br>Security Engineer at IBM.</li>
+                        <li><span>Jan 2020 - June 2020</span><br>Security Intern at IBM.</li>
+                    </ul>
+                   </div>
+                   <div class="tab-contents" id="education">
+                    <ul>
+                        <li><span>2022-2024</span><br>University of Maryland, College Park - MEng in Cybersecurity.</li>
+                        <li><span>2016-2020</span><br>University of Maryland, College Park - BTech in Electronics & Communication.</li>
+                    </ul>
+                   </div>
+            </div>
+            <div class="about-col-2">
+                <img id="photo2" src="./assets/personal_photo.png" alt="User Image">
+            </div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Services Section -->
+    <section id="services">
+        <div class="container">
+            <h2 class="subtitle">Services</h2>
+            <div class="services-list">
+                <!-- Service 1 -->
+                <div>
+                    <i class="fa-solid fa-bug"></i>
+                    <h2>Web Application Security</h2>
+                    <p>Strengthen and safeguard web applications against cyber threats. Expertise in preventing SQL Injections, Cross-Site Scripting, and Cross-Frame Scripting attacks.</p>
+                </div>
+                <!-- Service 2 -->
+                <div>
+                    <i class="fa-solid fa-flag-checkered"></i>
+                    <h2>Incident Response</h2>
+                    <p>Monitor cyber threats, participate in the complete incident response lifecycle, and provide detailed technical guidance on remediation efforts.</p>
+                </div>
+                <!-- Service 3 -->
+                <div>
+                    <i class="fas fa-code"></i>
+                    <h2>Secure Web Development</h2>
+                    <p>Design and develop secure web-based applications using technologies like Angular, HTML, CSS, JavaScript, and SpringBoot Microservices.</p>
+                </div>
+                <!-- Service 4 -->
+                <div>
+                    <i class="fa-brands fa-redhat"></i>
+                    <h2>Security Testing</h2>
+                    <p>Automate rigorous processes/methods involved in traditional security testing of applications, ensuring enhanced security testing and minimized risks.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+
+
+    <!-- Projects Section -->
+    <section id="projects">
+        <h2 class="subtitle">Projects</h2>
+        <div class="container">
+            <div class="projects-list">
+                <!-- Project 1 -->
+                <div class="project">
+                    <img src="./assets/personal_finance_tracker.png" alt="Personal Finance Tracker">
+                    <div class="layer">
+                        <h3>Personal Finance Tracker</h3>
+                        <p>A secure Django-based web application meticulously developed with DevSecOps and secure coding practices. Ensures user financial data is managed and tracked securely and efficiently.</p>
+                        <a href="https://github.com/AnudeepBetha/personal_finance_tracker" target="_blank"><i class="fas fa-external-link-alt"></i></a>
+                    </div>
+                </div>
+                <!-- Project 2 -->
+                <div class="project">
+                    <img src="./assets/detectx.png" alt="DetectX">
+                    <div class="layer">
+                        <h3>DetectX</h3>
+                        <p>A Python-based command-line tool designed to detect SQL Injection and Cross Site Scripting Vulnerabilities in web servers using RegEx pattern matching.</p>
+                        <a href="https://github.com/AnudeepBetha/detectx" target="_blank"><i class="fas fa-external-link-alt"></i></a>
+                    </div>
+                </div>
+                <!-- Project 3 -->
+                <div class="project">
+                    <img src="./assets/image_encyrption.png" alt="Chaotic-based Image Encryption">
+                    <div class="layer">
+                        <h3>Chaotic-based Image Encryption</h3>
+                        <p>A cutting-edge image encryption technique utilizing DNA Encryption standards and chaotic functions to ensure high resistance to unauthorized access.</p>
+                        <a href="https://ieeexplore.ieee.org/document/8822083" target="_blank"><i class="fas fa-external-link-alt"></i></a>
+                    </div>
+                </div>
+                <!-- Project 4 -->
+                <div class="project">
+                    <img src="./assets/data_hiding.png" alt="Reversible Data Hiding with Quick Response Code">
+                    <div class="layer">
+                        <h3>Reversible Data Hiding with Quick Response Code</h3>
+                        <p>An innovative algorithm focusing on preserving data integrity while concealing information, showcasing advancements in data encryption and application security.</p>
+                        <a href="https://ieeexplore.ieee.org/document/9104149" target="_blank"><i class="fas fa-external-link-alt"></i></a>
+                    </div>
+                </div>
+            </div>
+            <!-- <a href="#" class="btn">See More</a> -->
+        </div>
+    </section>
+    
+
+    <!-- Contact section -->
+    <div id="contact">
+        <div class="container">
+            <div class="row">
+                <div class="contact-left">
+                    <h1 class="subtitle">Let's Connect!</h1>
+                    <p><i class="fa-solid fa-paper-plane"></i>betha.anudeep@gmail.com</p>
+                    <div class="social-icons">
+                        <a href="https://www.linkedin.com/in/anudeep-betha/"><i class="fa-brands fa-linkedin"></i></a>
+                        <a href="https://instagram.com/anudeep_betha?igshid=OGQ5ZDc2ODk2ZA=="><i class="fa-brands fa-instagram"></i></a>
+                    </div>
+                    <a href="./assets/resume.pdf" class="btn btn2" download>Download Resume</a>
+                </div>
+                <div class="contact-right">
+                    <form action="https://formspree.io/f/xaygvkvq" method="POST">
+                        <input type="text" name="name" placeholder="Name" required>
+                        <input type="email" name="_replyto" placeholder="Email" required>
+                        <textarea name="message" rows="6" placeholder="Message"></textarea>
+                        <button type="submit" class="btn btn2">Submit</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div id="overlay">
+        <div id="overlay-content">
+          <p>Message sent successfully!</p>
+          <button onclick="closeOverlay()">Close</button>
+        </div>
+      </div>
+    <div class="footer">
+        <p>Copyright © Anudeep</p>
+    </div>
+    <script src="./assets/javascript.js"></script>
+</body>
+</html>
