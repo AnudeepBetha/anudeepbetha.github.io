@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -5,10 +6,13 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Anudeep Betha – Security Engineer Portfolio</title>
+    <!-- Google font for modern typography -->
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
     <!-- Font Awesome for icons -->
     <script src="https://kit.fontawesome.com/3bb6022044.js" crossorigin="anonymous"></script>
+    <!-- Material Symbols for icons (dark/light mode toggle) -->
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" rel="stylesheet">
     <!-- Inline CSS -->
     <style>
     /* Base resets */
@@ -96,31 +100,39 @@
         color: var(--color-accent);
     }
 
-    /* Theme toggle button */
+    /* Theme toggle button integrated in navbar */
     .theme-toggle {
-        position: fixed;
-        top: 1rem;
-        right: 1rem;
-        background: var(--color-surface);
+        background: transparent;
         border: none;
-        color: var(--color-primary);
-        padding: 0.5rem 0.6rem;
-        border-radius: 50%;
-        box-shadow: var(--shadow-card);
+        color: var(--color-text);
+        padding: 0.3rem;
+        font-size: 1.3rem;
         cursor: pointer;
-        z-index: 1000;
         transition: transform 0.2s ease;
+        margin-left: 1.2rem;
     }
 
     .theme-toggle:hover {
         transform: rotate(20deg);
     }
 
+    /* Material icons adjustment */
+    .material-symbols-outlined {
+        font-variation-settings:
+            'FILL' 0,
+            'wght' 400,
+            'GRAD' 0,
+            'opsz' 24;
+        font-size: 1.5rem;
+        vertical-align: middle;
+    }
+
     /* Navigation */
     .navbar {
         display: flex;
         align-items: center;
-        justify-content: space-between;
+        justify-content: flex-start;
+        flex-wrap: wrap;
         padding: 1rem 0;
         position: relative;
     }
@@ -132,7 +144,9 @@
     .nav-links {
         list-style: none;
         display: flex;
+        align-items: center;
         gap: 2rem;
+        margin-left: auto;
     }
     .nav-links a {
         font-weight: 600;
@@ -532,16 +546,72 @@
             font-size: 2rem;
         }
     }
+    /* Hero section (new) */
+    .hero-section {
+        background: var(--color-bg);
+        padding: 5rem 0 4rem;
+        position: relative;
+    }
+    .hero-content {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        flex-wrap: wrap;
+        gap: 2rem;
+    }
+    .hero-left {
+        flex: 1 1 260px;
+        text-align: center;
+    }
+    .hero-left .hero-img {
+        width: 260px;
+        height: 260px;
+        object-fit: cover;
+        border-radius: 50%;
+        box-shadow: var(--shadow-card);
+    }
+    .hero-right {
+        flex: 2 1 300px;
+        min-width: 280px;
+    }
+    .hero-name {
+        font-size: 2.8rem;
+        margin-bottom: 0.5rem;
+        color: var(--color-text);
+    }
+
+    /* Container for typing lines using JS */
+    .hero-typing-lines {
+        color: var(--color-primary);
+        font-weight: 600;
+        font-size: 1.4rem;
+        min-height: 3rem;
+        margin-bottom: 1rem;
+        white-space: nowrap;
+    }
+
+    /* Responsive hero adjustments */
+    @media (max-width: 768px) {
+        .hero-content {
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+        }
+        .hero-right {
+            align-items: center;
+        }
+        .hero-name {
+            font-size: 2.2rem;
+        }
+        .hero-typing-lines {
+            font-size: 1.2rem;
+        }
+    }
     </style>
 </head>
-<body>
-    <!-- Theme toggle button placed early for immediate availability -->
-    <button id="themeToggle" class="theme-toggle" aria-label="Toggle dark mode">
-        <i class="fas fa-moon"></i>
-    </button>
-
-    <!-- Header / Hero section with terminal style -->
-    <header class="terminal-hero" id="home">
+<body class="dark">
+    <!-- Header / Hero section -->
+    <header class="hero-section" id="home">
         <nav class="navbar" aria-label="Primary navigation">
             <div class="nav-brand">
                 <img src="assets/Logo.png" alt="Anudeep Logo" class="logo" />
@@ -554,34 +624,23 @@
                 <li><a href="#projects">Projects</a></li>
                 <li><a href="#contact">Contact</a></li>
             </ul>
+            <!-- Dark mode toggle integrated into nav -->
+            <button id="themeToggle" class="theme-toggle" aria-label="Toggle dark mode">
+                <span class="material-symbols-outlined">dark_mode</span>
+            </button>
+            <!-- Mobile menu toggle -->
             <button id="navToggle" class="nav-toggle" aria-label="Open navigation">
                 <i class="fas fa-bars"></i>
             </button>
         </nav>
-        <!-- Terminal window mimicking an oh-my-zsh prompt -->
-        <div class="terminal-wrapper">
-            <div class="terminal-window">
-                <div class="terminal-top-bar">
-                    <span class="terminal-dot red"></span>
-                    <span class="terminal-dot yellow"></span>
-                    <span class="terminal-dot green"></span>
-                </div>
-                <div class="terminal-content">
-                    <div class="terminal-line">
-                        <span class="prompt"><span class="user">anudeep</span>@<span class="host">portfolio</span> <span class="dir">~</span> <span class="symbol">$</span></span>
-                        <span class="command"> Hi, I'm Anudeep Betha</span>
-                    </div>
-                    <div class="terminal-line">
-                        <span class="prompt"><span class="user">anudeep</span>@<span class="host">portfolio</span> <span class="dir">~</span> <span class="symbol">$</span></span>
-                        <span class="command"> Security Engineer & Cybersecurity Specialist</span>
-                    </div>
-                    <div class="terminal-line cursor-line">
-                        <span class="prompt"><span class="user">anudeep</span>@<span class="host">portfolio</span> <span class="dir">~</span> <span class="symbol">$</span></span>
-                        <span class="command">_</span>
-                    </div>
-                </div>
+        <!-- Hero content with headshot and typing animation -->
+        <div class="hero-content container">
+            <div class="hero-left">
+                <img src="assets/personal_photo.png" alt="Portrait of Anudeep Betha" class="hero-img" />
             </div>
-            <div class="hero-cta">
+            <div class="hero-right">
+                <h1 class="hero-name">Anudeep Betha</h1>
+                <div id="typing-lines" class="hero-typing-lines"></div>
                 <a href="#projects" class="cta-button">Explore my work</a>
             </div>
         </div>
@@ -763,13 +822,16 @@
     const body = document.body;
     // Apply saved theme on load
     const storedTheme = localStorage.getItem('theme');
-    if (storedTheme === 'dark') {
+    if (storedTheme === 'light') {
+        body.classList.remove('dark');
+    } else {
         body.classList.add('dark');
     }
     // Switch icons based on mode
     function updateIcon() {
-        const icon = themeToggle.querySelector('i');
-        icon.className = body.classList.contains('dark') ? 'fas fa-sun' : 'fas fa-moon';
+        const iconSpan = themeToggle.querySelector('span');
+        if (!iconSpan) return;
+        iconSpan.textContent = body.classList.contains('dark') ? 'light_mode' : 'dark_mode';
     }
     updateIcon();
     themeToggle.addEventListener('click', () => {
@@ -807,6 +869,37 @@
     document.querySelectorAll('.section').forEach(section => {
         observer.observe(section);
     });
+
+    // Simple typewriter effect for hero lines
+    const lines = ["Hi, I'm Anudeep Betha", "Security Engineer & Cybersecurity Specialist"];
+    const typingContainer = document.getElementById('typing-lines');
+    let lineIndex = 0;
+    let charIndex2 = 0;
+    function typeLine() {
+        if (!typingContainer) return;
+        if (lineIndex >= lines.length) return;
+        const currentLine = lines[lineIndex];
+        if (charIndex2 < currentLine.length) {
+            typingContainer.innerHTML += currentLine.charAt(charIndex2);
+            charIndex2++;
+            setTimeout(typeLine, 80);
+        } else {
+            // finished current line
+            if (lineIndex < lines.length - 1) {
+                typingContainer.innerHTML += '<br>';
+                lineIndex++;
+                charIndex2 = 0;
+                setTimeout(typeLine, 400);
+            }
+        }
+    }
+    document.addEventListener('DOMContentLoaded', () => {
+        if (typingContainer) {
+            typingContainer.innerHTML = '';
+            setTimeout(typeLine, 500);
+        }
+    });
+
     </script>
 </body>
 </html>
