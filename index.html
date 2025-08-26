@@ -4,195 +4,809 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="shortcut icon" href="./assets/browser.ico" type="image/x-icon">
-    <title>Personal Portfolio</title>
-    <link rel="stylesheet" href="./assets/styles.css">
-    <link rel="stylesheet" href="./assets/mediaqueries.css">
+    <title>Anudeep Betha – Security Engineer Portfolio</title>
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+    <!-- Font Awesome for icons -->
     <script src="https://kit.fontawesome.com/3bb6022044.js" crossorigin="anonymous"></script>
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
+    <!-- Inline CSS -->
+    <style>
+    /* Base resets */
+    * {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+    }
+
+    body {
+        font-family: 'Inter', sans-serif;
+        line-height: 1.6;
+        color: var(--color-text);
+        background-color: var(--color-bg);
+        transition: background-color 0.3s ease, color 0.3s ease;
+        overflow-x: hidden;
+    }
+
+    /* CSS variables for light and dark themes */
+    :root {
+        --color-bg: #f7f8fa;
+        --color-surface: #ffffff;
+        --color-text: #0a0a23;
+        --color-primary: #1e40af; /* deep blue */
+        --color-accent: #10b981; /* green accent */
+        --color-muted: #6b7280; /* gray for secondary text */
+        --color-border: #e5e7eb;
+        --shadow-card: 0 4px 8px rgba(0, 0, 0, 0.04);
+
+        /* Terminal color palette for light mode */
+        --color-terminal-bg: #1e293b;        /* dark slate blue background */
+        --color-terminal-text: #0a0a23;      /* dark text for commands in light mode */
+        --color-terminal-user: #d6336c;       /* magenta for user segment */
+        --color-terminal-host: #15aabf;       /* cyan for host segment */
+        --color-terminal-dir: #40c057;        /* green for directory segment */
+        --color-terminal-symbol: #000000;     /* black for prompt symbol in light mode */
+    }
+
+    body.dark {
+        --color-bg: #0f172a;
+        --color-surface: #1e293b;
+        --color-text: #f1f5f9;
+        --color-primary: #93c5fd;
+        --color-accent: #6ee7b7;
+        --color-muted: #9ca3af;
+        --color-border: #334155;
+        --shadow-card: 0 6px 12px rgba(0, 0, 0, 0.4);
+
+        /* Terminal color palette for dark mode */
+        --color-terminal-bg: #0a192f;        /* very dark blue background */
+        --color-terminal-text: #e0e0e0;      /* light text for commands in dark mode */
+        --color-terminal-user: #f92672;       /* magenta/pink for user segment */
+        --color-terminal-host: #66d9ef;       /* cyan for host segment */
+        --color-terminal-dir: #a6e22e;        /* light green for directory segment */
+        --color-terminal-symbol: #ffffff;     /* white for prompt symbol in dark mode */
+    }
+
+    /* Global helpers */
+    .container {
+        width: 90%;
+        max-width: 1200px;
+        margin: 0 auto;
+        padding: 3rem 0;
+    }
+
+    h1, h2, h3 {
+        color: var(--color-text);
+        font-weight: 700;
+        margin-bottom: 1rem;
+        line-height: 1.2;
+    }
+
+    p {
+        margin-bottom: 1rem;
+        color: var(--color-text);
+    }
+
+    a {
+        color: var(--color-primary);
+        text-decoration: none;
+        transition: color 0.2s ease;
+    }
+
+    a:hover {
+        color: var(--color-accent);
+    }
+
+    /* Theme toggle button */
+    .theme-toggle {
+        position: fixed;
+        top: 1rem;
+        right: 1rem;
+        background: var(--color-surface);
+        border: none;
+        color: var(--color-primary);
+        padding: 0.5rem 0.6rem;
+        border-radius: 50%;
+        box-shadow: var(--shadow-card);
+        cursor: pointer;
+        z-index: 1000;
+        transition: transform 0.2s ease;
+    }
+
+    .theme-toggle:hover {
+        transform: rotate(20deg);
+    }
+
+    /* Navigation */
+    .navbar {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        padding: 1rem 0;
+        position: relative;
+    }
+    .navbar .logo {
+        width: 48px;
+        height: 48px;
+        object-fit: contain;
+    }
+    .nav-links {
+        list-style: none;
+        display: flex;
+        gap: 2rem;
+    }
+    .nav-links a {
+        font-weight: 600;
+        color: var(--color-text);
+        position: relative;
+    }
+    .nav-links a::after {
+        content: '';
+        position: absolute;
+        left: 0;
+        bottom: -4px;
+        width: 0;
+        height: 2px;
+        background: var(--color-accent);
+        transition: width 0.3s ease;
+    }
+    .nav-links a:hover::after,
+    .nav-links a:focus::after {
+        width: 100%;
+    }
+
+    /* Mobile nav toggle */
+    .nav-toggle {
+        display: none;
+        background: transparent;
+        border: none;
+        font-size: 1.5rem;
+        color: var(--color-text);
+        cursor: pointer;
+    }
+
+    /* Hero section */
+    /* Terminal hero overrides default hero styles */
+    .terminal-hero {
+        background: var(--color-bg);
+        padding: 6rem 0 4rem;
+        position: relative;
+    }
+    /* Navbar links within hero adopt normal color in terminal hero */
+    .terminal-hero .navbar a {
+        color: var(--color-text);
+    }
+    .terminal-hero .logo {
+        filter: none;
+    }
+    /* Wrapper to center terminal and CTA */
+    .terminal-wrapper {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        margin-top: 3rem;
+    }
+    /* Terminal window styling */
+    .terminal-window {
+        background: var(--color-terminal-bg);
+        color: var(--color-terminal-text);
+        border-radius: 0.5rem;
+        padding: 1.5rem;
+        width: 100%;
+        max-width: 720px;
+        box-shadow: var(--shadow-card);
+        font-family: 'Courier New', Courier, monospace;
+    }
+    .terminal-top-bar {
+        display: flex;
+        gap: 0.5rem;
+        margin-bottom: 1rem;
+    }
+    .terminal-dot {
+        width: 12px;
+        height: 12px;
+        border-radius: 50%;
+        display: inline-block;
+    }
+    .terminal-dot.red { background: #ff5f56; }
+    .terminal-dot.yellow { background: #ffbd2e; }
+    .terminal-dot.green { background: #27c93f; }
+    .terminal-content {
+        display: flex;
+        flex-direction: column;
+        gap: 0.3rem;
+        font-size: 1rem;
+    }
+    .terminal-line {
+        white-space: nowrap;
+        overflow: hidden;
+    }
+    .terminal-line .prompt {
+        margin-right: 0.5rem;
+    }
+    .terminal-line .user { color: var(--color-terminal-user); }
+    .terminal-line .host { color: var(--color-terminal-host); }
+    .terminal-line .dir { color: var(--color-terminal-dir); }
+    .terminal-line .symbol { color: var(--color-terminal-symbol); }
+    .terminal-line .command { color: var(--color-terminal-text); }
+
+    /* Blinking cursor effect on last line */
+    .cursor-line .command {
+        animation: blink 1s steps(1) infinite;
+    }
+    @keyframes blink {
+        50% { opacity: 0; }
+    }
+
+    /* CTA below terminal */
+    .hero-cta {
+        margin-top: 2rem;
+    }
+
+    /* Call-to-action buttons */
+    .cta-button {
+        display: inline-block;
+        background: var(--color-primary);
+        color: #fff;
+        padding: 0.8rem 1.6rem;
+        border-radius: 0.5rem;
+        font-weight: 600;
+        transition: transform 0.2s ease, box-shadow 0.2s ease;
+    }
+    .cta-button:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+    }
+    .cta-button.secondary {
+        background: transparent;
+        border: 2px solid var(--color-primary);
+        color: var(--color-primary);
+    }
+    .cta-button.secondary:hover {
+        background: var(--color-primary);
+        color: #fff;
+    }
+
+    /* Sections */
+    .section {
+        padding: 4rem 0;
+        opacity: 0;
+        transform: translateY(50px);
+        transition: opacity 0.6s ease, transform 0.6s ease;
+    }
+    .section.in-view {
+        opacity: 1;
+        transform: translateY(0);
+    }
+
+    /* About */
+    .about-grid {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 2rem;
+        align-items: center;
+    }
+    .about-image img {
+        width: 100%;
+        border-radius: 1rem;
+        box-shadow: var(--shadow-card);
+    }
+    .about-content h2 {
+        margin-bottom: 1rem;
+    }
+
+    /* Experience timeline */
+    .timeline {
+        position: relative;
+        margin-top: 2rem;
+        padding-left: 2rem;
+        border-left: 2px solid var(--color-border);
+    }
+    .timeline-item {
+        margin-bottom: 2rem;
+        position: relative;
+    }
+    .timeline-item::before {
+        content: '';
+        position: absolute;
+        left: -11px;
+        top: 0.25rem;
+        width: 12px;
+        height: 12px;
+        border-radius: 50%;
+        background: var(--color-accent);
+        border: 2px solid var(--color-surface);
+    }
+    .timeline-date {
+        font-size: 0.9rem;
+        font-weight: 600;
+        color: var(--color-muted);
+    }
+    .timeline h3 {
+        margin-top: 0.3rem;
+        font-size: 1.1rem;
+    }
+    .timeline ul {
+        margin-top: 0.5rem;
+        list-style: disc;
+        padding-left: 1.5rem;
+    }
+    .timeline li {
+        margin-bottom: 0.4rem;
+        color: var(--color-text);
+    }
+
+    /* Services / Cards */
+    .cards-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+        gap: 1.5rem;
+        margin-top: 2rem;
+    }
+    .card {
+        background: var(--color-surface);
+        padding: 2rem;
+        border-radius: 1rem;
+        box-shadow: var(--shadow-card);
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
+        text-align: center;
+    }
+    .card:hover {
+        transform: translateY(-6px);
+        box-shadow: 0 12px 24px rgba(0, 0, 0, 0.1);
+    }
+    .card-icon {
+        font-size: 2rem;
+        color: var(--color-accent);
+        margin-bottom: 1rem;
+    }
+    .card h3 {
+        margin-bottom: 0.5rem;
+        font-size: 1.25rem;
+    }
+    .card p {
+        color: var(--color-muted);
+        font-size: 0.95rem;
+    }
+
+    /* Projects */
+    .projects-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+        gap: 2rem;
+        margin-top: 2rem;
+    }
+    .project-card {
+        background: var(--color-surface);
+        border-radius: 1rem;
+        box-shadow: var(--shadow-card);
+        overflow: hidden;
+        display: flex;
+        flex-direction: column;
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+    .project-card:hover {
+        transform: translateY(-4px);
+        box-shadow: 0 8px 20px rgba(0, 0, 0, 0.08);
+    }
+    .project-card img {
+        width: 100%;
+        height: 180px;
+        object-fit: cover;
+    }
+    .project-content {
+        padding: 1.5rem;
+        flex-grow: 1;
+        display: flex;
+        flex-direction: column;
+    }
+    .project-content h3 {
+        margin-bottom: 0.5rem;
+        font-size: 1.2rem;
+    }
+    .project-content p {
+        flex-grow: 1;
+        font-size: 0.95rem;
+        color: var(--color-muted);
+        margin-bottom: 1rem;
+    }
+    .project-content a {
+        align-self: flex-start;
+        font-weight: 600;
+        color: var(--color-primary);
+        display: inline-flex;
+        align-items: center;
+        gap: 0.3rem;
+        transition: color 0.2s ease;
+    }
+    .project-content a:hover {
+        color: var(--color-accent);
+    }
+
+    /* Contact */
+    .contact-grid {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 2rem;
+        margin-top: 2rem;
+    }
+    .contact-info {
+        font-size: 1rem;
+    }
+    .contact-info i {
+        color: var(--color-accent);
+        margin-right: 0.5rem;
+    }
+    .social-links {
+        margin: 1rem 0;
+        display: flex;
+        gap: 1rem;
+    }
+    .social-links a {
+        font-size: 1.5rem;
+        color: var(--color-primary);
+        transition: color 0.2s ease;
+    }
+    .social-links a:hover {
+        color: var(--color-accent);
+    }
+    .contact-form label {
+        display: block;
+        font-weight: 600;
+        margin-bottom: 0.3rem;
+        color: var(--color-text);
+    }
+    .contact-form input,
+    .contact-form textarea {
+        width: 100%;
+        padding: 0.6rem 0.8rem;
+        border: 1px solid var(--color-border);
+        border-radius: 0.5rem;
+        background: var(--color-surface);
+        color: var(--color-text);
+        margin-bottom: 1rem;
+        font-family: inherit;
+        font-size: 1rem;
+        resize: vertical;
+        transition: border-color 0.2s ease;
+    }
+    .contact-form input:focus,
+    .contact-form textarea:focus {
+        outline: none;
+        border-color: var(--color-primary);
+    }
+
+    /* Footer */
+    .footer {
+        text-align: center;
+        padding: 2rem 0;
+        background: var(--color-surface);
+        border-top: 1px solid var(--color-border);
+        color: var(--color-muted);
+        font-size: 0.9rem;
+    }
+
+    /* Responsive styles */
+    @media (max-width: 768px) {
+        .about-grid {
+            grid-template-columns: 1fr;
+        }
+        .contact-grid {
+            grid-template-columns: 1fr;
+        }
+        .nav-links {
+            position: absolute;
+            top: 100%;
+            right: 0;
+            background: var(--color-surface);
+            flex-direction: column;
+            width: 200px;
+            padding: 1rem;
+            box-shadow: var(--shadow-card);
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.3s ease;
+        }
+        .nav-links.open {
+            max-height: 300px;
+        }
+        .nav-toggle {
+            display: block;
+        }
+        .navbar .nav-links {
+            gap: 1rem;
+        }
+        .hero {
+            padding: 6rem 0 4rem;
+        }
+        .hero-title {
+            font-size: 2.5rem;
+        }
+        .hero-subtitle {
+            font-size: 1rem;
+        }
+    }
+
+    @media (max-width: 480px) {
+        .hero-title {
+            font-size: 2rem;
+        }
+    }
+    </style>
 </head>
 <body>
-    <div id="header">
-        <div class="container">
-            <nav id="nav-bar">
-                <a href="#"><img class="logo" src="./assets/Logo.png"></a>
-                    <ul id="sidemenu">
-                        <li><a href="#header">Home</a></li>
-                        <li><a href="#about">About</a></li>
-                        <li><a href="#services">Services</a></li>
-                        <li><a href="#projects">Projects</a></li>
-                        <li><a href="#contact">Contact</a></li>
-                        <i class="fas fa-times" onclick="closemenu()"></i>
-                    </ul>
-                    <i class="fas fa-bars" onclick="openmenu()"></i>
-            </nav>
-            <div class="header-text">
-                <p>Cybersecurity Graduate Student</p>
-                <h1>Hi, I'm <span>Anudeep</span> Betha.<br> Welcome to my Portfolio!</h1>
-            </div>            
-        </div>
-    </div>
-    <!-- "About Me" Section -->
-    <div id="about">
-        <div class="container">
-            <div class="row about-row">
-            <div class="about-col-1">
-                <h1 class="subtitle">About Me</h1>
+    <!-- Theme toggle button placed early for immediate availability -->
+    <button id="themeToggle" class="theme-toggle" aria-label="Toggle dark mode">
+        <i class="fas fa-moon"></i>
+    </button>
 
-                <p>I'm a Cybersecurity Graduate Student with a background as an Application Security Engineer at IBM. My expertise lies in Web Application Security, where I'm passionate about both offense and defense. I thrive on staying at the forefront of cybersecurity trends, ensuring my skills are not just current but cutting-edge. <br><br> 
-                   Explore my portfolio to discover the projects and experiences that define my journey in securing the digital realm. Let's connect and contribute to making the virtual world safer for all.</p>
-                   <div class="tab-titles">
-                    <p  class="tab-links active-link" onclick="opentab('skills')">Skills</p>
-                    <p  class="tab-links" onclick="opentab('experience')">Experience</p>
-                    <p  class="tab-links" onclick="opentab('education')" >Education</p>
-                   </div>
-                   <div class="tab-contents active-tab" id="skills">
-                    <ul>
-                        <li><span>Penetration Testing</span><br>Skilled in simulating cyberattacks to identify Web Application vulnerabilities using tools like Burp Suite, Metasploit, Nmap, and more.</li> 
-                        <li><span>Incident Response</span><br>Expertise in monitoring cyber threats, participating in the incident response lifecycle, and utilizing CVE & CVSS scoring to assess and address vulnerabilities.</li>
-                        <li><span>Security Engineering</span><br>Strengthened business applications against cyberattacks with MFA authentication, remediated critical security vulnerabilities, and implemented security measures within frameworks.</li>
-                        <li><span>Secure Coding Practices</span><br>Proficient in programming with languages like Java, Python, C, C++, SQL, and more, ensuring applications are built with security at the forefront.</li>                        
-                    </ul>
+    <!-- Header / Hero section with terminal style -->
+    <header class="terminal-hero" id="home">
+        <nav class="navbar" aria-label="Primary navigation">
+            <div class="nav-brand">
+                <img src="assets/Logo.png" alt="Anudeep Logo" class="logo" />
+            </div>
+            <ul class="nav-links" id="navLinks">
+                <li><a href="#home">Home</a></li>
+                <li><a href="#about">About</a></li>
+                <li><a href="#experience">Experience</a></li>
+                <li><a href="#services">Services</a></li>
+                <li><a href="#projects">Projects</a></li>
+                <li><a href="#contact">Contact</a></li>
+            </ul>
+            <button id="navToggle" class="nav-toggle" aria-label="Open navigation">
+                <i class="fas fa-bars"></i>
+            </button>
+        </nav>
+        <!-- Terminal window mimicking an oh-my-zsh prompt -->
+        <div class="terminal-wrapper">
+            <div class="terminal-window">
+                <div class="terminal-top-bar">
+                    <span class="terminal-dot red"></span>
+                    <span class="terminal-dot yellow"></span>
+                    <span class="terminal-dot green"></span>
                 </div>
-                   <div class="tab-contents" id="experience">
-                    <ul>
-                        <li><span>Nov 2020 - Aug 2022</span><br>Security Engineer at IBM.</li>
-                        <li><span>Jan 2020 - June 2020</span><br>Security Intern at IBM.</li>
-                    </ul>
-                   </div>
-                   <div class="tab-contents" id="education">
-                    <ul>
-                        <li><span>2022-2024</span><br>University of Maryland, College Park - MEng in Cybersecurity.</li>
-                        <li><span>2016-2020</span><br>University of Maryland, College Park - BTech in Electronics & Communication.</li>
-                    </ul>
-                   </div>
+                <div class="terminal-content">
+                    <div class="terminal-line">
+                        <span class="prompt"><span class="user">anudeep</span>@<span class="host">portfolio</span> <span class="dir">~</span> <span class="symbol">$</span></span>
+                        <span class="command"> Hi, I'm Anudeep Betha</span>
+                    </div>
+                    <div class="terminal-line">
+                        <span class="prompt"><span class="user">anudeep</span>@<span class="host">portfolio</span> <span class="dir">~</span> <span class="symbol">$</span></span>
+                        <span class="command"> Security Engineer & Cybersecurity Specialist</span>
+                    </div>
+                    <div class="terminal-line cursor-line">
+                        <span class="prompt"><span class="user">anudeep</span>@<span class="host">portfolio</span> <span class="dir">~</span> <span class="symbol">$</span></span>
+                        <span class="command">_</span>
+                    </div>
+                </div>
             </div>
-            <div class="about-col-2">
-                <img id="photo2" src="./assets/personal_photo.png" alt="User Image">
-            </div>
+            <div class="hero-cta">
+                <a href="#projects" class="cta-button">Explore my work</a>
             </div>
         </div>
-    </div>
-    
-    <!-- Services Section -->
-    <section id="services">
+    </header>
+
+    <!-- About section -->
+    <section id="about" class="section about in-view">
         <div class="container">
-            <h2 class="subtitle">Services</h2>
-            <div class="services-list">
-                <!-- Service 1 -->
-                <div>
-                    <i class="fa-solid fa-bug"></i>
-                    <h2>Web Application Security</h2>
-                    <p>Strengthen and safeguard web applications against cyber threats. Expertise in preventing SQL Injections, Cross-Site Scripting, and Cross-Frame Scripting attacks.</p>
+            <div class="about-grid">
+                <div class="about-image">
+                    <!-- Replace with your own photo. Use a square aspect ratio for best results -->
+                    <img src="assets/personal_photo.png" alt="Portrait of Anudeep" />
                 </div>
-                <!-- Service 2 -->
-                <div>
-                    <i class="fa-solid fa-flag-checkered"></i>
-                    <h2>Incident Response</h2>
-                    <p>Monitor cyber threats, participate in the complete incident response lifecycle, and provide detailed technical guidance on remediation efforts.</p>
-                </div>
-                <!-- Service 3 -->
-                <div>
-                    <i class="fas fa-code"></i>
-                    <h2>Secure Web Development</h2>
-                    <p>Design and develop secure web-based applications using technologies like Angular, HTML, CSS, JavaScript, and SpringBoot Microservices.</p>
-                </div>
-                <!-- Service 4 -->
-                <div>
-                    <i class="fa-brands fa-redhat"></i>
-                    <h2>Security Testing</h2>
-                    <p>Automate rigorous processes/methods involved in traditional security testing of applications, ensuring enhanced security testing and minimized risks.</p>
+                <div class="about-content">
+                    <h2>About Me</h2>
+                    <p>
+                        I’m a seasoned Security Engineer with a passion for defending
+                        applications from emerging threats. With a background in
+                        application security at IBM and experience at growing
+                        startups, I bridge offensive and defensive skills to build
+                        trustworthy systems. I thrive on staying ahead of
+                        cybersecurity trends and enjoy sharing my knowledge through
+                        open‑source tools and research.
+                    </p>
+                    <p>
+                        Beyond code reviews and pentesting, I’m always exploring
+                        new technologies—whether it’s container security,
+                        cloud-native architecture, or automating risk detection.
+                        Outside of work, you’ll find me mentoring students and
+                        tinkering with side projects.
+                    </p>
                 </div>
             </div>
         </div>
     </section>
-    
 
-
-    <!-- Projects Section -->
-    <section id="projects">
-        <h2 class="subtitle">Projects</h2>
+    <!-- Experience section: timeline style for clarity -->
+    <section id="experience" class="section experience">
         <div class="container">
-            <div class="projects-list">
-                <!-- Project 1 -->
-                <div class="project">
-                    <img src="./assets/personal_finance_tracker.png" alt="Personal Finance Tracker">
-                    <div class="layer">
+            <h2>Experience</h2>
+            <div class="timeline">
+                <div class="timeline-item">
+                    <span class="timeline-date">Nov&nbsp;2024&nbsp;– Present</span>
+                    <h3>&lt;Current Company&gt; – Security Engineer</h3>
+                    <ul>
+                        <li>Performed in‑depth code reviews using automated and manual processes to detect security flaws and logic vulnerabilities.</li>
+                        <li>Developed tools that automate static analysis scans, filter false positives and generate actionable reports for developers.</li>
+                        <li>Conducted design reviews and SDLC gap analyses to integrate secure design practices into development cycles.</li>
+                        <li>Executed pentests on cloud services, analyzing authentication, authorization and API security.</li>
+                    </ul>
+                </div>
+                <div class="timeline-item">
+                    <span class="timeline-date">Aug&nbsp;2024&nbsp;– Nov&nbsp;2024</span>
+                    <h3>Blovo Animal Health – Security Engineer</h3>
+                    <ul>
+                        <li>Assessed early application builds via automated and manual code reviews to identify configuration and logic vulnerabilities.</li>
+                        <li>Built threat models that map data flows, trust boundaries and high‑risk areas; collaborated with developers on secure coding mitigations.</li>
+                    </ul>
+                </div>
+                <div class="timeline-item">
+                    <span class="timeline-date">Jan&nbsp;2020&nbsp;– Aug&nbsp;2022</span>
+                    <h3>IBM – Security Engineer</h3>
+                    <ul>
+                        <li>Developed secure application code, implementing encryption, access controls and input validation.</li>
+                        <li>Integrated security checks into CI/CD pipelines using GitHub, Jenkins and SonarQube, reducing detection and remediation time by 40%.</li>
+                        <li>Conducted automated and manual code reviews across Java, Python and JavaScript codebases to remediate critical authorization vulnerabilities.</li>
+                        <li>Performed threat modeling using the STRIDE framework and conducted comprehensive risk assessments.</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Services section -->
+    <section id="services" class="section services">
+        <div class="container">
+            <h2>Services</h2>
+            <div class="cards-grid">
+                <div class="card">
+                    <div class="card-icon"><i class="fa-solid fa-bug"></i></div>
+                    <h3>Web Application Security</h3>
+                    <p>Comprehensive security assessments to prevent SQL injection, XSS, CSRF and other vulnerabilities.</p>
+                </div>
+                <div class="card">
+                    <div class="card-icon"><i class="fa-solid fa-flag-checkered"></i></div>
+                    <h3>Incident Response</h3>
+                    <p>Monitoring, incident triage and remediation guidance across the full incident response lifecycle.</p>
+                </div>
+                <div class="card">
+                    <div class="card-icon"><i class="fas fa-code"></i></div>
+                    <h3>Secure Development</h3>
+                    <p>Design and build secure web applications using modern frameworks (Angular, Spring Boot, Django).</p>
+                </div>
+                <div class="card">
+                    <div class="card-icon"><i class="fa-brands fa-redhat"></i></div>
+                    <h3>Security Automation</h3>
+                    <p>Automate security testing and integrate scanning into CI/CD to minimize risk.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Projects section -->
+    <section id="projects" class="section projects">
+        <div class="container">
+            <h2>Projects</h2>
+            <div class="projects-grid">
+                <article class="project-card">
+                    <img src="assets/personal_finance_tracker.png" alt="Personal Finance Tracker screenshot" />
+                    <div class="project-content">
                         <h3>Personal Finance Tracker</h3>
-                        <p>A secure Django-based web application meticulously developed with DevSecOps and secure coding practices. Ensures user financial data is managed and tracked securely and efficiently.</p>
-                        <a href="https://github.com/AnudeepBetha/personal_finance_tracker" target="_blank"><i class="fas fa-external-link-alt"></i></a>
+                        <p>Django‑based web app built with DevSecOps and secure coding practices to protect sensitive financial data.</p>
+                        <a href="https://github.com/AnudeepBetha/personal_finance_tracker" target="_blank" rel="noopener">View Source <i class="fas fa-arrow-up-right-from-square"></i></a>
                     </div>
-                </div>
-                <!-- Project 2 -->
-                <div class="project">
-                    <img src="./assets/detectx.png" alt="DetectX">
-                    <div class="layer">
+                </article>
+                <article class="project-card">
+                    <img src="assets/detectx.png" alt="DetectX tool screenshot" />
+                    <div class="project-content">
                         <h3>DetectX</h3>
-                        <p>A Python-based command-line tool designed to detect SQL Injection and Cross Site Scripting Vulnerabilities in web servers using RegEx pattern matching.</p>
-                        <a href="https://github.com/AnudeepBetha/detectx" target="_blank"><i class="fas fa-external-link-alt"></i></a>
+                        <p>Python CLI tool that scans web servers for SQL injection and cross‑site scripting vulnerabilities using regex pattern matching.</p>
+                        <a href="https://github.com/AnudeepBetha/detectx" target="_blank" rel="noopener">View Source <i class="fas fa-arrow-up-right-from-square"></i></a>
                     </div>
-                </div>
-                <!-- Project 3 -->
-                <div class="project">
-                    <img src="./assets/image_encyrption.png" alt="Chaotic-based Image Encryption">
-                    <div class="layer">
-                        <h3>Chaotic-based Image Encryption</h3>
-                        <p>A cutting-edge image encryption technique utilizing DNA Encryption standards and chaotic functions to ensure high resistance to unauthorized access.</p>
-                        <a href="https://ieeexplore.ieee.org/document/8822083" target="_blank"><i class="fas fa-external-link-alt"></i></a>
+                </article>
+                <article class="project-card">
+                    <img src="assets/image_encyrption.png" alt="Chaotic Image Encryption visualization" />
+                    <div class="project-content">
+                        <h3>Chaotic‑based Image Encryption</h3>
+                        <p>Research into DNA encryption and chaotic functions to protect images from unauthorized access.</p>
+                        <a href="https://ieeexplore.ieee.org/document/8822083" target="_blank" rel="noopener">Read Paper <i class="fas fa-arrow-up-right-from-square"></i></a>
                     </div>
-                </div>
-                <!-- Project 4 -->
-                <div class="project">
-                    <img src="./assets/data_hiding.png" alt="Reversible Data Hiding with Quick Response Code">
-                    <div class="layer">
-                        <h3>Reversible Data Hiding with Quick Response Code</h3>
-                        <p>An innovative algorithm focusing on preserving data integrity while concealing information, showcasing advancements in data encryption and application security.</p>
-                        <a href="https://ieeexplore.ieee.org/document/9104149" target="_blank"><i class="fas fa-external-link-alt"></i></a>
+                </article>
+                <article class="project-card">
+                    <img src="assets/data_hiding.png" alt="Data hiding research screenshot" />
+                    <div class="project-content">
+                        <h3>Reversible Data Hiding &amp; QR Codes</h3>
+                        <p>Innovative algorithm for preserving data integrity while concealing information within QR codes.</p>
+                        <a href="https://ieeexplore.ieee.org/document/9104149" target="_blank" rel="noopener">Read Paper <i class="fas fa-arrow-up-right-from-square"></i></a>
                     </div>
-                </div>
+                </article>
             </div>
-            <!-- <a href="#" class="btn">See More</a> -->
         </div>
     </section>
-    
 
     <!-- Contact section -->
-    <div id="contact">
+    <section id="contact" class="section contact">
         <div class="container">
-            <div class="row">
-                <div class="contact-left">
-                    <h1 class="subtitle">Let's Connect!</h1>
-                    <p>
-                        <a href="mailto:betha.anudeep@gmail.com">
-                            <i class="fa-solid fa-paper-plane"></i>betha.anudeep@gmail.com
-                        </a>
-                    </p>
-                    <div class="social-icons">
-                        <a href="https://www.linkedin.com/in/anudeep-betha/"><i class="fa-brands fa-linkedin"></i></a>
-                        <a href="https://instagram.com/anudeep_betha?igshid=OGQ5ZDc2ODk2ZA=="><i class="fa-brands fa-instagram"></i></a>
+            <h2>Let’s Connect</h2>
+            <div class="contact-grid">
+                <div class="contact-info">
+                    <p><i class="fa-solid fa-paper-plane"></i> <a href="mailto:betha.anudeep@gmail.com">betha.anudeep@gmail.com</a></p>
+                    <div class="social-links">
+                        <a href="https://www.linkedin.com/in/anudeep-betha/" aria-label="LinkedIn"><i class="fa-brands fa-linkedin"></i></a>
+                        <a href="https://instagram.com/anudeep_betha?igshid=OGQ5ZDc2ODk2ZA==" aria-label="Instagram"><i class="fa-brands fa-instagram"></i></a>
                     </div>
-                    <a href="./assets/Anudeep_Betha.pdf" class="btn btn2" download>Download Resume</a>
+                    <a href="assets/Anudeep_Betha.pdf" class="cta-button secondary" download>Download Resume</a>
                 </div>
-                <div class="contact-right">
-                    <form action="https://formspree.io/f/xaygvkvq" method="POST">
-                        <input type="text" name="name" placeholder="Name" required>
-                        <input type="email" name="_replyto" placeholder="Email" required>
-                        <textarea name="message" rows="6" placeholder="Message"></textarea>
-                        <button type="submit" class="btn btn2">Submit</button>
-                    </form>
-                </div>
+                <form class="contact-form" id="contactForm" action="https://formspree.io/f/xaygvkvq" method="POST">
+                    <label for="name">Name</label>
+                    <input type="text" id="name" name="name" required>
+                    <label for="email">Email</label>
+                    <input type="email" id="email" name="_replyto" required>
+                    <label for="message">Message</label>
+                    <textarea id="message" name="message" rows="5" required></textarea>
+                    <button type="submit" class="cta-button">Send Message</button>
+                </form>
             </div>
         </div>
-    </div>
-    <div id="overlay">
-        <div id="overlay-content">
-          <p>Message sent successfully!</p>
-          <button onclick="closeOverlay()">Close</button>
-        </div>
-      </div>
-    <div class="footer">
-        <p>Copyright © Anudeep</p>
-    </div>
-    <script src="./assets/javascript.js"></script>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <p>© <span id="year"></span> Anudeep Betha. All rights reserved.</p>
+    </footer>
+
+    <!-- JavaScript for interactivity -->
+    <script>
+    // Theme toggle functionality
+    const themeToggle = document.getElementById('themeToggle');
+    const body = document.body;
+    // Apply saved theme on load
+    const storedTheme = localStorage.getItem('theme');
+    if (storedTheme === 'dark') {
+        body.classList.add('dark');
+    }
+    // Switch icons based on mode
+    function updateIcon() {
+        const icon = themeToggle.querySelector('i');
+        icon.className = body.classList.contains('dark') ? 'fas fa-sun' : 'fas fa-moon';
+    }
+    updateIcon();
+    themeToggle.addEventListener('click', () => {
+        body.classList.toggle('dark');
+        localStorage.setItem('theme', body.classList.contains('dark') ? 'dark' : 'light');
+        updateIcon();
+    });
+
+    // Mobile navigation toggle
+    const navToggle = document.getElementById('navToggle');
+    const navLinks = document.getElementById('navLinks');
+    navToggle.addEventListener('click', () => {
+        navLinks.classList.toggle('open');
+        navToggle.classList.toggle('active');
+    });
+    // Close nav on link click (mobile)
+    document.querySelectorAll('.nav-links a').forEach(link => {
+        link.addEventListener('click', () => {
+            navLinks.classList.remove('open');
+            navToggle.classList.remove('active');
+        });
+    });
+
+    // Dynamic year in footer
+    document.getElementById('year').textContent = new Date().getFullYear();
+
+    // Scroll‑triggered animations using IntersectionObserver
+    const observer = new IntersectionObserver(entries => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                entry.target.classList.add('in-view');
+            }
+        });
+    }, { threshold: 0.2 });
+    document.querySelectorAll('.section').forEach(section => {
+        observer.observe(section);
+    });
+    </script>
 </body>
 </html>
